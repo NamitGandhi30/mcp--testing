@@ -1,114 +1,99 @@
 # MCP Server Tester
 
-A web application for testing MCP (Model Control Protocol) servers. This application allows you to verify connectivity and functionality of MCP servers using installation codes from marketplaces like Smithery.
+A modern web application for testing and verifying MCP server connections.
+
+![MCP Server Tester](https://via.placeholder.com/800x400?text=MCP+Server+Tester)
 
 ## Features
 
-- Simple and intuitive user interface
-- Real-time connection verification
-- Functional testing capabilities
-- Clear error reporting and status updates
-- Modern, responsive design
+- Test connectivity to MCP servers
+- Verify server functionality
+- Beautiful UI with dark and light mode
+- Interactive JSON configuration
 
-## Prerequisites
+## Getting Started
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+### Prerequisites
 
-## Setup
+- Node.js (v16 or newer)
+- npm or yarn
 
-### Frontend
+### Installation
 
-1. Navigate to the frontend directory:
-   ```bash
-   cd mcp-tester
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/mcp-tester.git
+cd mcp-tester
+```
+
+2. Install dependencies
+```bash
+npm install
+# or
+yarn
+```
+
+3. Start the development server
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## How to Use
+
+1. **Enter MCP Server Configuration**:
+   - In the main text area, enter your MCP server configuration in JSON format
+   - Example format:
+   ```json
+   {
+     "mcpServers": {
+       "server-name": {
+         "command": "cmd",
+         "args": ["arg1", "arg2"]
+       }
+     }
+   }
    ```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+2. **Verify Connection**:
+   - Click the "Verify Connection" button to check connectivity to the configured server(s)
+   - Results will be displayed below the buttons
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+3. **Run Test**:
+   - Click the "Run Test" button to perform a full functionality test
+   - Test results will be displayed in the results area
 
-The frontend will be available at `http://localhost:5173`
+4. **Toggle Dark/Light Mode**:
+   - Use the sun/moon toggle in the top-right corner to switch between dark and light mode
+   - Your preference will be saved for future visits
 
-### Backend
+## API Routes
 
-1. Navigate to the backend directory:
-   ```bash
-   cd mcp-tester-backend
-   ```
+The application connects to a local backend server running on port 8000:
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+- `/verify` - POST endpoint for verifying server connectivity
+- `/test` - POST endpoint for running functionality tests
 
-3. Start the server:
-   ```bash
-   npm run dev
-   ```
+## Building for Production
 
-The backend will be available at `http://localhost:3001`
+To build the application for production:
 
-## Usage
+```bash
+npm run build
+# or
+yarn build
+```
 
-1. Open your browser and navigate to `http://localhost:5173`
-2. Enter your MCP installation code in the input field
-3. Click "Verify Connection" to check if the server is reachable
-4. Click "Run Test" to perform a functional test of the MCP server
-5. View the results in the response area below the buttons
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Connection Failed**
-   - Check if the installation code is correct
-   - Verify that the MCP server is running and accessible
-   - Check your internet connection
-
-2. **Invalid Installation Code**
-   - Ensure the code follows the correct format
-   - Double-check for any typos
-   - Verify the code is from a supported marketplace
-
-3. **Server Errors**
-   - Check the backend console for detailed error messages
-   - Verify that all required environment variables are set
-   - Ensure the backend server is running
-
-## Deployment
-
-### Frontend (Netlify)
-
-1. Build the frontend:
-   ```bash
-   cd mcp-tester
-   npm run build
-   ```
-
-2. Deploy the `dist` directory to Netlify
-
-### Backend (Vercel)
-
-1. Push your code to a Git repository
-2. Connect your repository to Vercel
-3. Configure environment variables in Vercel
-4. Deploy
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
+The built files will be in the `dist` directory and can be served using any static file server.
 
 ## License
 
-ISC
+MIT
+
+## Acknowledgements
+
+- Built with React and Vite
+- Styled with Tailwind CSS

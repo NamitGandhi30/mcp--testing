@@ -3,70 +3,213 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html.dark {
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  width: 100%;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@layer components {
+  /* Form styles */
+  .form-input,
+  .form-textarea,
+  .form-select,
+  .form-multiselect {
+    @apply block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-50;
+  }
+  
+  .dark .form-input,
+  .dark .form-textarea,
+  .dark .form-select,
+  .dark .form-multiselect {
+    @apply border-gray-700 bg-black/30 text-gray-100 focus:border-indigo-500 focus:ring-indigo-200;
+  }
+  
+  .form-input,
+  .form-textarea,
+  .form-select,
+  .form-multiselect {
+    @apply border-gray-300 bg-white text-gray-900 focus:border-indigo-500 focus:ring-indigo-200;
+  }
+  
+  /* Custom scrollbar styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .dark .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-black/20 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+  
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-indigo-500/50 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-indigo-300 rounded-full;
+  }
+  
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-indigo-400/70;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-indigo-400;
+  }
+  
+  /* Glassmorphism */
+  .glass-dark {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20;
+  }
+  
+  .glass-light {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-xl;
+  }
+  
+  /* Animation utilities */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(167, 139, 250, 0.3),
+                 0 0 10px rgba(167, 139, 250, 0.2),
+                 0 0 15px rgba(167, 139, 250, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.5),
+                 0 0 20px rgba(167, 139, 250, 0.3),
+                 0 0 30px rgba(167, 139, 250, 0.2);
+    }
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+  
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Add responsive font size adjustments */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 16px;
   }
-  a:hover {
-    color: #747bff;
+}
+
+/* Better styled focus rings */
+*:focus-visible {
+  @apply outline-none ring-2 ring-opacity-50;
+}
+
+.dark *:focus-visible {
+  @apply ring-pink-500;
+}
+
+*:focus-visible {
+  @apply ring-indigo-500;
+}
+
+/* Gradient text */
+.dark .gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-blue-500;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600;
+}
+
+/* Hover effects for interactive elements */
+.hover-lift {
+  @apply transition-transform duration-200;
+}
+.hover-lift:hover {
+  @apply transform -translate-y-1;
+}
+
+/* Button styles */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md;
+}
+
+.btn-primary {
+  @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500;
+}
+
+.btn-secondary {
+  @apply bg-pink-600 text-white hover:bg-pink-700 focus:ring-pink-500;
+}
+
+/* Background animation */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
   }
-  button {
-    background-color: #f9f9f9;
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 300% 300%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Card formatting */
+.card {
+  @apply rounded-xl overflow-hidden transition-all duration-300;
+}
+
+.dark .card {
+  @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl shadow-purple-900/20;
+}
+
+.card {
+  @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-xl shadow-indigo-200/50;
 }
